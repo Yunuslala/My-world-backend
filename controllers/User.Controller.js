@@ -1,5 +1,6 @@
 const {UserModel}=require('../models/User.Model');
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcrypt');
+const jwt=require("jsonwebtoken")
 const SignUP=async(req,res)=>{
     try {
         const {email,fullName,password,contact}=req.body;
@@ -35,7 +36,12 @@ const Login=async(req,res)=>{
                 if(err){
                     res.status(401).send({"msg":"wrong password"})
                 }else{
-                    res.status(201).send({"msg":"Login Sucessful",user:FindUser})
+                    const token = jwt.sign(
+                        { userId: FindUser._id,},
+                        "Secret",
+                        { expiresIn: "3h" }
+                      );
+                    res.status(201).send({"msg":"Login Sucessful",user:FindUser,token})
                 }
             })
         }else{
