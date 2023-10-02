@@ -63,7 +63,7 @@
  * @swagger
  * tags:
  *   name: Products
- *   description: Endpoints for managing product
+ *   description: Endpoints for managing the Products. Protected Routes that can be accessed After authorizing by using the authorize button or by sending a authorization header with value `Bearer <enter token, you can create token by logging in>`.
  *
  * /product/Add:
  *   post:
@@ -119,7 +119,7 @@
  *     summary: Get details of a product by ID
  *     tags: [Products]
  *     parameters:
- *       - in: path
+ *       - in: params
  *         name: productId
  *         schema:
  *           type: string
@@ -130,9 +130,9 @@
  *         description: Product details
  *       500:
  *         description: Internal Server Error
- * /product/search/{id}:
+ * /product/search:
  *   get:
- *     summary: Get details of a product by ID
+ *     summary: Get details of a list of product by searching query
  *     tags: [Products]
  *     security:
  *       - bearerAuth: []
@@ -150,7 +150,7 @@
  * @swagger
  * tags:
  *   name: Order
- *   description: Endpoints for managing the user's shopping cart. Protected Routes that can be accessed After authorizing by using the authorize button or by sending a authorization header with value `Bearer <enter token, you can create token by logging in>`.
+ *   description: Endpoints for managing the user's Orders. Protected Routes that can be accessed After authorizing by using the authorize button or by sending a authorization header with value `Bearer <enter token, you can create token by logging in>`.
  * 
  *
  * /Order/Add:
@@ -166,6 +166,13 @@
  *           schema:
  *             type: object
  *             properties:
+ *               ProductDetails: 
+ *                  type: Object
+ *                  properties:
+ *                    productId: 
+ *                      type: String
+ *                    quantity:
+ *                      type: Number
  *               address1:
  *                 type: string
  *                 description: The first line of the address.
